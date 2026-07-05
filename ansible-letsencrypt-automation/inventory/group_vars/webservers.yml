@@ -1,0 +1,23 @@
+---
+# Group variables applied to all hosts in [webservers].
+# Secrets (e.g. cloudflare_api_token) should be moved into an
+# ansible-vault encrypted file in production use.
+
+certbot_email: "admin@example.com"
+
+certbot_domains:
+  - name: example.com
+    aliases:
+      - www.example.com
+
+  - name: api.example.com
+    aliases: []
+
+  - name: admin.example.com
+    aliases: []
+
+# Set to true to hit the Let's Encrypt staging environment
+# (recommended while testing, avoids production rate limits).
+certbot_staging: false
+
+nginx_ssl_snippet_path: /etc/nginx/snippets/ssl.conf

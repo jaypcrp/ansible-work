@@ -1,0 +1,23 @@
+---
+# Requests a certificate per domain entry in certbot_domains.
+# Idempotent: the `creates` argument skips hosts that already
+# have a live certificate for the given domain.
+
+- name: Obtain SSL certificates for all domains
+  ansible.builtin.command: >
+    certbot certonly
+    --nginx
+    --non-interactive
+    --agree-tos
+    {{ certbot_staging_flag }}
+    --email {{ certbot_email }}
+    -d {{ item.name }}
+    {% for alias in item.aliases %}
+    -d {{ alias }}
+    {% endfor %}
+  args:
+    creates: "/etc/letsencrypt/live/{{ item.name }}/fullchain.pem"
+  loop: "{{ certbot_domains }}"
+  loop_control:
+    label: "{{ item.name }}"
+  notify: reload nginx

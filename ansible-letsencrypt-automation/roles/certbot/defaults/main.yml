@@ -1,0 +1,27 @@
+---
+# Default variables for the certbot role.
+# Override these in inventory/group_vars or host_vars as needed.
+
+certbot_email: "admin@example.com"
+
+certbot_domains: []
+# Example:
+# certbot_domains:
+#   - name: example.com
+#     aliases:
+#       - www.example.com
+
+# Use Let's Encrypt's staging environment to avoid hitting
+# production rate limits while testing.
+certbot_staging: false
+
+certbot_packages:
+  - certbot
+  - python3-certbot-nginx
+  - python3-certbot-dns-cloudflare
+
+nginx_ssl_snippet_path: /etc/nginx/snippets/ssl.conf
+
+# Cron schedule for automatic renewal (defaults to daily at 03:00).
+certbot_renewal_hour: "3"
+certbot_renewal_minute: "0"

@@ -1,0 +1,26 @@
+*.retry
+*.log
+.vault_pass
+*.pem
+*.key
+*.crt
+
+# Python / Ansible virtualenv artifacts
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Molecule / Docker
+molecule/default/.molecule/
+.cache/
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ansible collections installed locally
+collections/
+roles/*/roles/

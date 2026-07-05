@@ -1,0 +1,8 @@
+---
+- name: Ensure Certbot auto-renewal cron job is present
+  ansible.builtin.cron:
+    name: "Renew Let's Encrypt certificates"
+    minute: "{{ certbot_renewal_minute }}"
+    hour: "{{ certbot_renewal_hour }}"
+    job: "certbot renew --quiet --post-hook 'systemctl reload nginx'"
+    state: present

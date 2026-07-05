@@ -1,0 +1,5 @@
+---
+# Internal/computed variables for the certbot role.
+# These are not meant to be overridden by consumers of the role.
+
+certbot_staging_flag: "{{ '--staging' if certbot_staging | bool else '' }}"

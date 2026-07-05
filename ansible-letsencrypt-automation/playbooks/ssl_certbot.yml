@@ -1,0 +1,11 @@
+---
+# Entry-point playbook: provisions and auto-renews Let's Encrypt
+# certificates on all hosts in the [webservers] group.
+
+- name: Automate SSL Certificates with Let's Encrypt
+  hosts: webservers
+  become: true
+
+  roles:
+    - role: certbot
+      tags: [certbot, ssl, nginx]

@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  author: Jay Prajapati
+  description: Automates Let's Encrypt SSL certificate issuance and renewal for NGINX
+  company: Personal Portfolio
+  license: MIT
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+
+  galaxy_tags:
+    - ssl
+    - nginx
+    - certbot
+    - letsencrypt
+    - security
+
+dependencies: []

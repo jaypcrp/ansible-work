@@ -1,0 +1,18 @@
+---
+# Entry point for the certbot role - includes each stage in order.
+
+- name: Install Certbot and dependencies
+  ansible.builtin.include_tasks: install.yml
+  tags: [certbot, install]
+
+- name: Obtain SSL certificates
+  ansible.builtin.include_tasks: certificates.yml
+  tags: [certbot, ssl]
+
+- name: Configure NGINX SSL settings
+  ansible.builtin.include_tasks: nginx.yml
+  tags: [nginx, ssl]
+
+- name: Configure automatic certificate renewal
+  ansible.builtin.include_tasks: renewal.yml
+  tags: [certbot, renewal]
