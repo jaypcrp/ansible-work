@@ -11,10 +11,6 @@ venv/
 __pycache__/
 *.pyc
 
-# Molecule / Docker
-molecule/default/.molecule/
-.cache/
-
 # Editor / OS cruft
 .vscode/
 .idea/

@@ -1,6 +1,5 @@
 # Ansible Let's Encrypt Automation
 
-[![Lint](https://github.com/<your-username>/ansible-letsencrypt-automation/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/<your-username>/ansible-letsencrypt-automation/actions/workflows/ansible-lint.yml)
 ![Ansible](https://img.shields.io/badge/ansible-%3E%3D2.14-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -44,8 +43,6 @@ ansible-letsencrypt-automation/
 ├── .gitignore
 ├── ansible.cfg
 ├── requirements.yml
-├── .yamllint
-├── .ansible-lint
 │
 ├── inventory/
 │   ├── hosts.ini
@@ -71,12 +68,6 @@ ansible-letsencrypt-automation/
 │       ├── meta/main.yml
 │       └── README.md
 │
-├── .github/workflows/ansible-lint.yml
-├── molecule/default/
-│   ├── molecule.yml
-│   ├── converge.yml
-│   └── verify.yml
-│
 └── docs/
     ├── Architecture.md
     ├── Workflow.md
@@ -91,8 +82,6 @@ ansible-letsencrypt-automation/
 - Staging-vs-production toggle (`certbot_staging`) to avoid Let's Encrypt rate limits while testing
 - Hardened NGINX SSL configuration (TLS 1.2/1.3 only, strong ciphers, HSTS, OCSP stapling)
 - Automatic renewal via cron with a reload-on-renew post-hook
-- CI linting with `ansible-lint` (production profile) and `yamllint`
-- Molecule + Docker test scaffold for the role
 - Fully tagged tasks (`certbot`, `ssl`, `nginx`, `install`, `renewal`)
 
 ## Quick Start
@@ -110,9 +99,8 @@ ansible-playbook -i inventory/hosts.ini playbooks/ssl_certbot.yml --check --diff
 ansible-playbook -i inventory/hosts.ini playbooks/ssl_certbot.yml
 ```
 
-See [docs/Workflow.md](docs/Workflow.md) for linting, tagged runs, and
-Molecule testing instructions, and [roles/certbot/README.md](roles/certbot/README.md)
-for the full variable reference.
+See [docs/Workflow.md](docs/Workflow.md) for tagged runs and
+[roles/certbot/README.md](roles/certbot/README.md) for the full variable reference.
 
 ## Lessons Learned / Design Trade-offs
 
