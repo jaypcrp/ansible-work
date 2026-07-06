@@ -1,4 +1,0 @@
----
-# No services need restarting as part of this role; retained for
-# structural consistency and as a place to hook in future alerting
-# (e.g. notify a Slack webhook on backup failure).
