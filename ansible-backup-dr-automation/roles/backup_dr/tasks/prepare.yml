@@ -1,0 +1,8 @@
+---
+- name: Ensure backup directory exists
+  ansible.builtin.file:
+    path: "{{ backup_dest_dir }}"
+    state: directory
+    mode: "0700"
+    owner: root
+    group: root

@@ -1,0 +1,11 @@
+---
+- name: Backup MySQL databases
+  ansible.builtin.shell: >
+    mysqldump -u root -p{{ mysql_root_password }} {{ item }} |
+    gzip > {{ backup_dest_dir }}/mysql_{{ item }}_{{ backup_timestamp }}.sql.gz
+  args:
+    creates: "{{ backup_dest_dir }}/mysql_{{ item }}_{{ backup_timestamp }}.sql.gz"
+  loop: "{{ mysql_databases }}"
+  loop_control:
+    label: "{{ item }}"
+  no_log: true

@@ -1,0 +1,28 @@
+---
+# Variables applied to every host in the inventory.
+# Secrets are kept separate in group_vars/all/vault.yml (ansible-vault encrypted)
+# and referenced here via vault_-prefixed variable names - never commit
+# plaintext credentials.
+
+backup_root: /var/backups/ansible
+s3_bucket: mycompany-backups
+retention_days: 30
+
+# Databases to dump on hosts in the [databases] group (PostgreSQL).
+postgres_databases:
+  - app_production
+  - reporting
+
+# Databases to dump on hosts in the [mysql_servers] group.
+mysql_databases:
+  - legacy_app
+
+# Directories archived on every host.
+config_dirs:
+  - /etc/nginx
+  - /etc/app
+
+# Sourced from the vaulted file - see group_vars/all/vault.yml.
+mysql_root_password: "{{ vault_mysql_root_password }}"
+aws_access_key: "{{ vault_aws_key }}"
+aws_secret_key: "{{ vault_aws_secret }}"

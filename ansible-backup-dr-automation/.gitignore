@@ -1,0 +1,21 @@
+*.retry
+*.log
+.vault_pass
+*.sql.gz
+*.tar.gz
+
+# Python / Ansible virtualenv artifacts
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ansible collections installed locally
+collections/
+roles/*/roles/

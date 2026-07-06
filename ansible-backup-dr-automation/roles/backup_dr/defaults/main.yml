@@ -1,0 +1,24 @@
+---
+# Default variables for the backup_dr role.
+# Override these in inventory/group_vars as needed.
+
+backup_root: /var/backups/ansible
+s3_bucket: ""
+retention_days: 30
+
+backup_timestamp: >-
+  {{ ansible_date_time.date }}_{{ ansible_date_time.hour }}{{ ansible_date_time.minute }}
+
+postgres_databases: []
+mysql_databases: []
+
+config_dirs:
+  - /etc/nginx
+  - /etc/app
+
+mysql_root_password: ""
+aws_access_key: ""
+aws_secret_key: ""
+
+# S3 storage class for uploaded backups.
+backup_s3_storage_class: STANDARD_IA

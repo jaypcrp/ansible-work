@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  author: Jay Prajapati
+  description: Automated backup and disaster-recovery role - PostgreSQL/MySQL dumps, config archives, S3 upload, and retention cleanup
+  company: Personal Portfolio
+  license: MIT
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+
+  galaxy_tags:
+    - backup
+    - disaster-recovery
+    - postgresql
+    - mysql
+    - s3
+
+dependencies: []

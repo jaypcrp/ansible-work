@@ -1,0 +1,11 @@
+---
+- name: Backup PostgreSQL databases
+  ansible.builtin.shell: >
+    pg_dump -U postgres {{ item }} | gzip >
+    {{ backup_dest_dir }}/{{ item }}_{{ backup_timestamp }}.sql.gz
+  args:
+    creates: "{{ backup_dest_dir }}/{{ item }}_{{ backup_timestamp }}.sql.gz"
+  loop: "{{ postgres_databases }}"
+  loop_control:
+    label: "{{ item }}"
+  become_user: postgres

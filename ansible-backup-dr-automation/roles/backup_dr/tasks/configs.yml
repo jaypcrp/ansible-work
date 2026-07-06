@@ -1,0 +1,15 @@
+---
+- name: Backup application config directory
+  ansible.builtin.archive:
+    path: "{{ config_dirs }}"
+    dest: "{{ backup_dest_dir }}/configs_{{ backup_timestamp }}.tar.gz"
+    format: gz
+  register: config_archive
+  failed_when: false
+
+- name: Warn if config archive failed
+  ansible.builtin.debug:
+    msg: >-
+      Config archive failed for {{ inventory_hostname }}:
+      {{ config_archive.msg | default('unknown error') }}
+  when: config_archive is failed

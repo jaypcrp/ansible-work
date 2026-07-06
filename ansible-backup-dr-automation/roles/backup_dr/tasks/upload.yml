@@ -1,0 +1,13 @@
+---
+- name: Upload backups to S3
+  ansible.builtin.command: >
+    aws s3 sync {{ backup_dest_dir }}/
+    s3://{{ s3_bucket }}/{{ inventory_hostname }}/{{ backup_timestamp }}/
+    --storage-class {{ backup_s3_storage_class }}
+    --sse AES256
+  environment:
+    AWS_ACCESS_KEY_ID: "{{ aws_access_key }}"
+    AWS_SECRET_ACCESS_KEY: "{{ aws_secret_key }}"
+  register: s3_sync
+  changed_when: "'upload:' in s3_sync.stdout"
+  no_log: true

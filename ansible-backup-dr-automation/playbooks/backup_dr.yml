@@ -1,0 +1,12 @@
+---
+# Entry-point playbook: backs up PostgreSQL/MySQL databases and
+# application config directories, ships them to S3, and prunes
+# backups older than the configured retention window.
+
+- name: Automated Backup Solution
+  hosts: all
+  become: true
+
+  roles:
+    - role: backup_dr
+      tags: [backup, dr]

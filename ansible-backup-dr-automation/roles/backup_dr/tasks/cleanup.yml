@@ -1,0 +1,20 @@
+---
+# Prunes local backup archives older than retention_days so disks
+# don't fill up once backups have already been shipped to S3.
+# (S3 lifecycle rules on the bucket handle remote-side retention.)
+
+- name: Find local backups older than the retention window
+  ansible.builtin.find:
+    paths: "{{ backup_dest_dir }}"
+    patterns: "*.sql.gz,*.tar.gz"
+    age: "{{ retention_days }}d"
+    recurse: false
+  register: expired_backups
+
+- name: Remove expired local backups
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ expired_backups.files }}"
+  loop_control:
+    label: "{{ item.path }}"

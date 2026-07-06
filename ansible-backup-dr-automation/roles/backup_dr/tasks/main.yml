@@ -1,0 +1,28 @@
+---
+# Entry point for the backup_dr role - includes each stage in order.
+
+- name: Prepare backup directory
+  ansible.builtin.include_tasks: prepare.yml
+  tags: [backup, prepare]
+
+- name: Back up PostgreSQL databases
+  ansible.builtin.include_tasks: postgres.yml
+  tags: [backup, postgres]
+  when: "'databases' in group_names"
+
+- name: Back up MySQL databases
+  ansible.builtin.include_tasks: mysql.yml
+  tags: [backup, mysql]
+  when: "'mysql_servers' in group_names"
+
+- name: Back up application config directories
+  ansible.builtin.include_tasks: configs.yml
+  tags: [backup, configs]
+
+- name: Upload backups to S3
+  ansible.builtin.include_tasks: upload.yml
+  tags: [backup, upload]
+
+- name: Prune backups older than the retention window
+  ansible.builtin.include_tasks: cleanup.yml
+  tags: [backup, cleanup]
